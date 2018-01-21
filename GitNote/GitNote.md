@@ -70,7 +70,7 @@ $ git init
 
 `git checkout`其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
 
-#远程仓库
+##远程仓库
 需要先注册GitHub账号。由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置：
 
 - 第1步：创建`SSH Key`。在用户主目录下，看看有没有`.ssh`目录，如果有，再看看这个目录下有没有`id_rsa`和`id_rsa.pub`这两个文件，
@@ -86,13 +86,42 @@ $ git init
 然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：
 
 ##添加远程库
-- 第一步，在Github上创建一个仓库
+- 第一步，在Github上创建一个空仓库
 
+- 第二步，根据GitHub的提示，在本地的learngit仓库下运行命令：
+   > $ git remote add origin git@github.com:Yourusername/warehousename.git <br>
+   >这里需要替换为你自己的账户名跟仓库名。
+- 第三步，由于远程库是空的，我们第一次推送`master`分支时，加上了`-u`参数，Git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来。 
+>$ git push -u origin master
+- 第四布，从现在起，只要本地作了提交，就可以通过命令：
+> $ git push origin master
 
+##克隆Github上的仓库
 
+要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。
 
+Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
 
+##Git分支
 
+查看分支：git branch
 
+创建分支：git branch `<name>`
+
+切换分支：git checkout `<name>`
+
+创建+切换分支：git checkout -b `<name>`
+
+合并某分支到当前分支：git merge `<name>`
+
+删除分支：git branch -d `<name>`
+
+用git log --graph命令可以看到分支合并图。
+
+合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。
+
+当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。
+
+如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
 
 ##相关链接 [廖雪峰Git](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
