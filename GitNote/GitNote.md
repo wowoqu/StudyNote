@@ -1,5 +1,5 @@
-#Git Note
-##安装Git
+# Git Note
+## 安装Git
 在Windows上使用Git，可以从Git官网直接下载安装程序，然后按默认选项安装即可。
 安装完成后，需要进行设置，在命令行输入：
 ```
@@ -8,7 +8,7 @@ $ git config -- global user.email 'Your email'
 ```
 >注意git config命令的--global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
 
-##创建版本库
+## 创建版本库
 ```
 $ git init
 ```
@@ -24,7 +24,7 @@ $ git init
 **要随时掌握工作区的状态，使用git status命令。
 如果git status告诉你有文件被修改过，用git diff可以查看修改内容。**
 
-##版本回退
+## 版本回退
 
 `git log`命令显示从最近到最远的提交日志，如果嫌输出信息太多，看得眼花缭乱的，可以试试加上`--pretty=oneline`参数。
 
@@ -35,7 +35,7 @@ $ git init
 
 要重返未来，用`git reflog`查看命令历史，以便确定要回到未来的哪个版本。
 
-###示例代码：
+### 示例代码：
 
     $ git reset --hard 3628164
     $ git reset --hard HEAD^  
@@ -43,7 +43,7 @@ $ git init
 >第一次修改 -> git add -> 第二次修改 -> git commit
 >Git管理的是修改，当你用git add命令后，在工作区的第一次修改被放入暂存区，准备提交，但是，在工作区的第二次修改并没有放入暂存区，所以，git commit只负责把暂存区的修改提交了，也就是第一次的修改被提交了，第二次的修改不会被提交
 
-##撤销修改
+## 撤销修改
 
 `git checkout -- file`可以丢弃工作区的修改：
 就是让这个文件回到最近一次`git commit`或`git add`时的状态。
@@ -57,7 +57,7 @@ $ git init
 
 - 场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库
 
-##删除文件
+## 删除文件
 
 >$ git rm 文件名
 
@@ -70,7 +70,7 @@ $ git init
 
 `git checkout`其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
 
-##远程仓库
+## 远程仓库
 需要先注册GitHub账号。由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置：
 
 - 第1步：创建`SSH Key`。在用户主目录下，看看有没有`.ssh`目录，如果有，再看看这个目录下有没有`id_rsa`和`id_rsa.pub`这两个文件，
@@ -85,7 +85,7 @@ $ git init
 - 第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：
 然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：
 
-##添加远程库
+## 添加远程库
 - 第一步，在Github上创建一个空仓库
 
 - 第二步，根据GitHub的提示，在本地的learngit仓库下运行命令：
@@ -96,13 +96,13 @@ $ git init
 - 第四布，从现在起，只要本地作了提交，就可以通过命令：
 > $ git push origin master
 
-##克隆Github上的仓库
+## 克隆Github上的仓库
 
 要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。
 
 Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
 
-##Git分支
+## Git分支
 
 查看分支：git branch
 
@@ -124,4 +124,4 @@ Git支持多种协议，包括https，但通过ssh支持的原生git协议速度
 
 如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
 
-##相关链接 [廖雪峰Git](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+## 相关链接 [廖雪峰Git](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
