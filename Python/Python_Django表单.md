@@ -1,4 +1,4 @@
-##Python Django Form(表单)
+## Python Django Form(表单)
 + 创建项目 django-admin.exe startproject CSVT
 + 创建APP django-admin.exe startapp blog
 + settings.py
@@ -50,7 +50,8 @@ HTML中遍历
         {% endfor %}
         {% endif %}
             
-##Django 获取html的post请求
+
+## Django 获取html的post请求
 HTML
         
         <form action="test" method="post">     #提交到test页面，方式为post
@@ -88,12 +89,12 @@ HTML中回显
             passwd:{{passwd}}
         {% endif %}
 
-###req.POST 为request.QueryDict 对象 
+### req.POST 为request.QueryDict 对象 
 可以在shell中导入 blog.views，然后request.QueryDict.,按tab键查询相应方法。
 
-##Django 文件上传
-###第一种，在前端输入，并用open()  write() 方法保存
-###index.html
+## Django 文件上传
+### 第一种，在前端输入，并用open()  write() 方法保存
+### index.html
     <div>用户注册</div>
     
     <form action="" method="post" enctype="multipart/form-data">
@@ -101,7 +102,7 @@ HTML中回显
         <!--  uf.as_p为将uf遍历显示出来 第一步 添加 enctype='multipart/form-data' -->
         <input type="submit" value="submit">
     </form>
-###views.py
+### views.py
     from django.http import HttpResponse
     from django.shortcuts import render,render_to_response
     from django import forms
@@ -137,7 +138,7 @@ HTML中回显
         else:
             uf = Userform()
         return render_to_response('index.html',locals())    
-###models.py
+### models.py
     from django.db import models
     
     # Create your models here.
@@ -147,9 +148,9 @@ HTML中回显
     
         def __str__(self):
             return self.username
-###第三种是创建后台，在后台的表中更改，上传数据。
+### 第三种是创建后台，在后台的表中更改，上传数据。
 
-###admin.py
+### admin.py
     from django.contrib import admin
     from blog.models import User
     # Register your models here.
@@ -158,10 +159,10 @@ HTML中回显
     
     admin.site.register(User,UserAdmin)
 
-##Django Ajax
+## Django Ajax
 + settings.py中，导入应用'blog',注释掉MIDDLEWARE = [] 中的csrf模块
 
-###views.py
+### views.py
     from django.http import HttpResponse
     from django.shortcuts import render,render_to_response
     # from django.template import RequestContext
@@ -179,7 +180,7 @@ HTML中回显
                 return HttpResponse(req.body) #返回给ajax的数据，success中的response
         else:
             return render_to_response('index.html',{}) #初始化页面用
-###urls.py
+### urls.py
     from django.conf.urls import url
     from blog.views import *
     
@@ -187,7 +188,7 @@ HTML中回显
         # path('admin/', admin.site.urls),
         url(r'^index/$',tajax),
         url(r'^index/test/$',tajax), ajax 中的url地址，必须在这里有路由，即这里必须有该地址。
-###最后 index.html配置
+### 最后 index.html配置
     
     <!DOCTYPE html>
     <html lang="en">

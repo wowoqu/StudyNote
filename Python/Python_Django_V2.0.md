@@ -1,23 +1,23 @@
-#Django Note
-##环境配置
+# Django Note
+## 环境配置
 >Windows下的环境配置
     打开powershell，先安装pip。
     安装完成之后输入：pip install Django
-##测试是否安装完成：
+## 测试是否安装完成：
     >>> python
     >>> import django
     >>> django.VERSION
 
 出现版本信息则说明安装完成
 
-##创建第一个项目
-###进入powershell，进入项目创建的位置。
+## 创建第一个项目
+### 进入powershell，进入项目创建的位置。
 >cd python
-###创建一个项目
+### 创建一个项目
 >django-admin.exe startproject testdjango
-###进入项目文件夹中
+### 进入项目文件夹中
 >cd testdjango
-###更改setting.py文件夹。
+### 更改setting.py文件夹。
     INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -27,7 +27,7 @@
     'django.contrib.staticfiles',
     'blog', #这是自己定义的应用，创建应用后要先在这里添加一下
     ]
-###更改urls.py文件。
+### 更改urls.py文件。
     from django.conf.urls import url #导入url
     from blog.views import index     #从自己创建的应用的view中导入处理函数index
 
@@ -36,9 +36,9 @@
         url(r'^index/$',index),     #前面是正则表达式，后面是对应的处理函数
                                     #当浏览器访问127.0.0.1:8000/index/ 时就会调用index函数
     ]    
-###创建第一个应用
+### 创建第一个应用
 >django-admin.exe startapp blog #这个就是刚才提到的应用blog
-###创建模板
+### 创建模板
     在blog文件夹下创建一个名为templates的文件夹，并在该文件夹下创建一个index1.html文件
 
 index1.html
@@ -57,9 +57,9 @@ index1.html
 
 ```
 
-###更改blog文件夹下面的views.py文件
+### 更改blog文件夹下面的views.py文件
 
-####创建index函数
+#### 创建index函数
 >from django.shortcuts import render,render_to_response
 >
 >def index(req):
@@ -67,7 +67,7 @@ index1.html
 
 
 
-##Django模板变量
+## Django模板变量
 Django模板变量是由两个花括号组成的 ```{{}} ```,括号当中存贮模板变量
 ><title>{{user}}</title> #user为模板变量
 
@@ -109,7 +109,8 @@ def index(req):
     return render_to_response('index1.html',{'title':'abc','user':user,'person':person})
 
 ```
-###调用
+
+### 调用
 ```
 <span> {{title}} </span><br>
 <span> {{user.name}} </span>
@@ -121,7 +122,7 @@ booklist = ['java','php','html','python']
 return render_to_response('index1.html',{'booklist':booklist})
 调用 {{booklist.0}}
 
-##Django执行顺序
+## Django执行顺序
 + django install
 + django-admin.exe startproject
 + django-admin.exe startapp
@@ -134,7 +135,7 @@ return render_to_response('index1.html',{'booklist':booklist})
 + python manager.py runserver
     * url 127.0.0.1:8000/index
 
-##Django模板标签
+## Django模板标签
 + if标签
     * {% if 判断语句%}  //判断语句不可以包含括号，and和or不可以一起使用
     * {% else %}
@@ -158,7 +159,7 @@ return render_to_response('index1.html',{'booklist':booklist})
     * {{forloop.last}} 判断用，判断是否是序列的最后一个
     * {{forloop.parentloop}} 判断用，判断是否是上一次递归
 
-##使用模板的几种方式
+## 使用模板的几种方式
 导入```render_to_response```
 >from django.shortcuts import render,render_to_response
 
@@ -169,7 +170,7 @@ return render_to_response('index1.html',{'booklist':booklist})
 title是传递的模板变量，可以是普通变量，字典，对象等在html模板{}中可以写对象的属性，对象的方法，调用方法时不可以传参 ，不要写括号，必须有返回值
 
 渲染时存在优先级问题:普通变量>字典>对象的属性>对象的方法>列表。
-###第二种方法
+### 第二种方法
 ```
 from django.shortcuts import render,render_to_response
 from django.template import loader
@@ -182,7 +183,7 @@ def index1(req):
     return HttpResponse(html)               //渲染html
 ```
 
-###第三种方法(这个好像没成功)
+### 第三种方法(这个好像没成功)
 ```
 def index2(req):
     t = Teplate(' <h1>hello</h1> ')        //通过Template类创建一个模板
@@ -191,31 +192,31 @@ def index2(req):
     return HttpResponse(html)               //渲染html
 ```
 
-##通过urls.py文件向url方法里的index函数传递变量有两种方法。
+## 通过urls.py文件向url方法里的index函数传递变量有两种方法。
 + get方法
 + 正则表达式分组 (?P<id>/d{2}) 这是一个分组 规定变量的形参名 ，调用方法要加上相同的行参名。 如果没有规定形参名(/d{2}),那么可以随意设置形参名即可
 
 
-##Django模板标签
+## Django模板标签
 
-###ifequal/ifnotequal        //判断两个值是否相等
+### ifequal/ifnotequal        //判断两个值是否相等
     {% ifequal user currentuser %}
     {% endif %}
 
-##注释
+## 注释
 + {# 这是个注释 #}
 +     {% comment %}
     * {% endcomment %}
 
-##过滤器  {{name | lower}} 相关自行查询
+## 过滤器  {{name | lower}} 相关自行查询
 
-##include 模板标签
+## include 模板标签
 + 如果这个模板没有导入父模板的话，可以使用include标签。
 + 导入了父模板的模板是不能用include标签的。
 + include标签的使用
 + {% include '模板名称' %}    //模板名称可以是模板变量 可以写模板的相对位置‘template/模板名称’
 
-##模板继承
+## 模板继承
 + 在父模板中定义
 
 ```
@@ -250,7 +251,7 @@ def index2(req):
 
 
 
-##模板的使用技巧
+## 模板的使用技巧
 
 如果在模板中使用 {% extends %} ，必须保证其为模板中的第一个模板标记。 否则，模板继承将不起作用。
 一般来说，基础模板中的 {% block %} 标签越多越好。 记住，子模板不必定义父模板中所有的代码块，因此你可以用合理的缺省值对一些代码块进行填充，然后只对子模板所需的代码块进行（重）定义。 俗话说，钩子越多越好。
@@ -259,7 +260,7 @@ def index2(req):
 
 不允许在同一个模板中定义多个同名的 {% block %} 。 存在这样的限制是因为block 标签的工作方式是双向的。 也就是说，block 标签不仅挖了一个要填的坑，也定义了在父模板中这个坑所填充的内容。如果模板中出现了两个相同名称的 {% block %} 标签，父模板将无从得知要使用哪个块的内容。
 
-##locals()技巧
+## locals()技巧
 
 ```
 locals()返回一个包含当前作用域里面的所有变量和它们的值的字典
@@ -271,11 +272,11 @@ def current_datetime6(request):
     return render_to_response('current_datetime6.html', locals())
 ```
 
-##Django模型
-###安装mysql 安装pymysql
+## Django模型
+### 安装mysql 安装pymysql
 > pip install pymysql
 
-###进行settings.py配置
+### 进行settings.py配置
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',   //将这里的.后面加上mysql
@@ -287,11 +288,11 @@ def current_datetime6(request):
         }
     }
 
-###blog/__init__.py配置
+### blog/__init__.py配置
     import pymysql
     pymysql.install_as_MySQLdb()
 
-###blog/models.py配置
+### blog/models.py配置
 
     from django.db import models
     
@@ -311,7 +312,7 @@ def current_datetime6(request):
 
 
 
-###powershell下的项目文件夹下运行
+### powershell下的项目文件夹下运行
 + 验证模型的有效性
     * > python manager.py check
 + 生成create table语句
@@ -321,7 +322,7 @@ def current_datetime6(request):
 + 创建管理员账户 python manager.py createsuperuser
 
 
-##在shell下添加、修改数据
+## 在shell下添加、修改数据
 > python manager.py shell
 
     from blog.models import Employee
@@ -339,11 +340,11 @@ def current_datetime6(request):
     emps[0].id
     emps[0].name   
 
-##在views.py传递
+## 在views.py传递
 >emps = Employee.objects.all()
 >return render_to_response('index.html',locals())
 
-##一对多关系
+## 一对多关系
     class Entry(models.Model):
         name = models.CharField(max_length=20)
         def __str__(self):
@@ -354,13 +355,13 @@ def current_datetime6(request):
         def __str__(self):
             return self.name
 
-##在shell中查看
+## 在shell中查看
     from blog.models import Entry.Blog
     entry1 = Entry.objects.create(name='alen')    //一个作者
     blog1 = Blog.objects.create(name='alen_blog1',entry=entry1)//可以写多篇文章
     blog2 = Blog.objects.create(name='alen_blog2',entry=entry1)
     blog3 = Blog.objects.create(name='alen_blog3',entry=entry1)
-##查看
+## 查看
     blog1.entry (输出)<Entry: alen>
     blog2.entry (输出)<Entry: alen>
     
@@ -370,7 +371,7 @@ def current_datetime6(request):
     entry.blog_set.all()
      <QuerySet [<Blog: alen_blog1>, <Blog: alen_blog2>, <Blog: alen_blog3>]>(输出)
 
-##python manager.py shell 下的增删改查
+## python manager.py shell 下的增删改查
 
 1、models.AutoField　　自增列 = int(11)
 　　如果没有的话，默认会生成一个名称为 id 的列，如果要显示的自定义一个自增列，必须将给列设置为主键 primary_key=True。
@@ -415,7 +416,7 @@ def current_datetime6(request):
 23、models.ImageField   图片
 24、models.FilePathField 文件
 
-##增删改查
+## 增删改查
     增
     
     models.Tb1.objects.create(c1='xx', c2='oo')  增加一条数据，可以接受字典类型数据 **kwargs
@@ -442,7 +443,7 @@ def current_datetime6(request):
 基本操作---增删改查，增删改后，需要重新导入Employee类
 [相关链接](http://www.cnblogs.com/luxiaojun/p/5795070.html)
 
-##querySet的遍历
+## querySet的遍历
     emps = Employee.objects.all()
     for x in emps:
         print(x.id)    //x.字段名称  将所有的字段都打印出来
@@ -462,12 +463,12 @@ def current_datetime6(request):
      print(emp.query)         #emp.query 转变为SQL语法格式
      [out]: SELECT `blog_employee`.`id`, `blog_employee`.`name`, `blog_employee`.`age`, `blog_employee`.`addr` FROM `blog_employee` WHERE `blog_employee`.`id` = 1   # 这里是转变完的
 
-##admin后台管理。
-###创建项目 django-admin.exe startproject csvt
-###创建一个应用 django-admin.exe startapp blog
-###在blog文件夹下创建一个名为templates的文件夹，并在该文件夹下创建一个index1
-###settings.py设置，导入应用，'DIRS': [os.path.join(BASE_DIR, 'templates')]，在MIDDLEWARE =[]中添加'django.middleware.locale.LocaleMiddleware',这句意思后台采用中文。
-###urls.py设置
+## admin后台管理。
+### 创建项目 django-admin.exe startproject csvt
+### 创建一个应用 django-admin.exe startapp blog
+### 在blog文件夹下创建一个名为templates的文件夹，并在该文件夹下创建一个index1
+### settings.py设置，导入应用，'DIRS': [os.path.join(BASE_DIR, 'templates')]，在MIDDLEWARE =[]中添加'django.middleware.locale.LocaleMiddleware',这句意思后台采用中文。
+### urls.py设置
     from django.contrib import admin
     admin.autodiscover()
 
@@ -477,7 +478,7 @@ def current_datetime6(request):
         url(r'^blog/regist/$',register),
         # url(r'^blog/regist/test/$',register)
     ]
-###admin.py设置
+### admin.py设置
     from django.contrib import admin
     from blog.models import User  #models的User表
     # Register your models here.
@@ -493,8 +494,8 @@ def current_datetime6(request):
 
     admin.site.register(User,UserAdmin)
 
-##Django 多对多关系模型
-###models.py配置
+## Django 多对多关系模型
+### models.py配置
     from django.db import models
     
     sex_choices = (
@@ -513,7 +514,7 @@ def current_datetime6(request):
     
         def __str__(self):
             return self.name
-###shell 下查询
+### shell 下查询
     alen = Author.object.get(name='alen')
     alen.book_set.all()    #获取Alen所有的书
     alen.book_set.add(Book对象)  #向alen中添加书籍

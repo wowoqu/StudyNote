@@ -1,5 +1,5 @@
-#Xpath Note
-###表达式
+# Xpath Note
+### 表达式
 
     article      选取所有article元素的所有子节点
     /article     选取根元素article

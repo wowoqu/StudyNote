@@ -1,11 +1,11 @@
-##Python WebScrap
-###相关框架
+## Python WebScrap
+### 相关框架
 + urllib
 + requests
 + scrapy
 + BeautifulSoup
 
-###一个简单的爬虫程序
+### 一个简单的爬虫程序
     from urllib.request import urlopen
     from bs4 import BeautifulSoup
     html = urlopen('http://www.pythonscraping.com/pages/page1.html') #获取页面html对象
@@ -17,7 +17,7 @@
     print(bsobj) #打印整个页面
     print(bsobj.title) #打印页面的标题包含<title></title>，如果只是打印内容的话用bsobj.title.get_text()获取
 
-###添加异常处理
+### 添加异常处理
     from urllib.request import urlopen
     from bs4 import BeautifulSoup
     from urllib.request import HTTPError,URLError
@@ -39,7 +39,7 @@
         print('Title could not be found')
     else:
         print(title)
-###BeautifulSoup的find(),findAll()
+### BeautifulSoup的find(),findAll()
 + find()，findAll(tag,attributes,recursive,text,limit,keywords)
     * find(tag,attributes,recursive,text,keywords)
     * find('h1',{'class':'text'},recursive=True,text='abc',id='b')
@@ -50,15 +50,15 @@
     * keyword，让你选择那些具有指定的标签
 
 
-###处理子标签和兄弟标签
+### 处理子标签和兄弟标签
 bsobj.find('table',{'id':'abc'}).children   #获取指定标签的所有子标签，不包括孙子标签
 bsobj.find('table',{'id':'abc'}).tr.next_siblings 
-#获取指定标签的同级向下的所有兄弟标签，不包括向上的标签
+# 获取指定标签的同级向下的所有兄弟标签，不包括向上的标签
 bsobj.find('table',{'id':'abc'}).tr.previous_siblings
-#指定标签的同级向上的所有兄弟标签
+# 指定标签的同级向上的所有兄弟标签
 bsobj.find('table',{'id':'abc'}).parent  #父级标签
 
-##正则表达式
+## 正则表达式
 \* 匹配前面的字符、子表达式、或括号里的字符0次或多次
 \+ 匹配前面的字符、子表达式、或括号里的字符至少一次
 \[\] 匹配任意一个字符，相当于任选一个 \[A-Z\]\*
@@ -68,7 +68,7 @@ bsobj.find('table',{'id':'abc'}).parent  #父级标签
 | 匹配任意一个由竖线分割的字符、子表达式 b(a|b|c)d
 . 匹配任意单个字符（包括符号，数字和空格等）
 
-###正则实例
+### 正则实例
     from urllib.request import urlopen
     from bs4 import BeautifulSoup
     import re
@@ -80,7 +80,7 @@ bsobj.find('table',{'id':'abc'}).parent  #父级标签
         print(image['src'])  #获取属性的值
 
 
-###遍历单个域名
+### 遍历单个域名
     from urllib.requests import urlopen
     from bs4 import BeautifulSoup
 
@@ -91,7 +91,7 @@ bsobj.find('table',{'id':'abc'}).parent  #父级标签
             print(link.attrs['href'])
     
 
-###页面随机跳转到子链接，直到不再有子链接为止
+### 页面随机跳转到子链接，直到不再有子链接为止
     from urllib.requests import urlopen
     from bs4 import BeautifulSoup
     import datetime
@@ -110,7 +110,7 @@ bsobj.find('table',{'id':'abc'}).parent  #父级标签
         links = getLinks(newArticle)
     
 
-###采集整个网站
+### 采集整个网站
     from urllib.requests import urlopen
     from bs4 import BeautifulSoup
     import re
@@ -129,10 +129,10 @@ bsobj.find('table',{'id':'abc'}).parent  #父级标签
                     getLinks(newPage)
     getLinks('')     #从站点根目录开始
 
-#以下为Python Scripy内容
+# 以下为Python Scripy内容
 爬虫的目的将非结构性语言转换为结构性语言
-##案例一：Jobbole网站爬取 
-###创建虚拟环境 (可能不是完整的)
+## 案例一：Jobbole网站爬取 
+### 创建虚拟环境 (可能不是完整的)
 
 创建环境
 
@@ -374,7 +374,7 @@ jobbole.py
     def parse_detail(self, response):
         article_item['url_object_id'] = get_md5(response.url)
 
-##设计数据库并将Item保存到数据库中 
+## 设计数据库并将Item保存到数据库中 
 
 创建与item中对应的数据库表
 
@@ -547,7 +547,7 @@ items.py
             sexitem = item_loader.load_item()
             yield sexitem  
 
-#Selenium Note
+# Selenium Note
 
 安装selenium
 
