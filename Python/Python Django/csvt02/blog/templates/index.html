@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{db.title}}</title>
+</head>
+<body>
+	{{db.title}}
+	{% for x in emps %}
+	<p> x: {{x}} </p>
+	{% endfor %}
+	{{emps}}
+	<!-- <p> {{emps.length}} </p> -->
+	<!-- <p>这个 {{many_to_one.0}}作者写的Blog如下 </p> -->
+	{% for x in many_to_one %}
+	<p>这个{{x}}作者写的Blog如下</p>
+	{% for y in x.blog_set.all %}
+	<p> {{forloop.counter}}. {{y}} </p>
+	{% endfor %}
+	{% endfor %}
+</body>
+</html>

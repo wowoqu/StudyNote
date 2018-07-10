@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>csvt012 {% block title %} {% endblock %} </title>
+</head>
+<body>
+{% if param in title %}
+<li> {{param}} </li>
+{% else %}
+<p>Error</p>
+{% endif %}
+<p>23333</p>
+{% for abc in title %}
+<p> {{forloop.counter}} : {{abc}} </p>
+{% endfor %}
+
+
+{% block abc %}
+{% include 'index3.html' %}
+{% endblock %}
+
+
+{% block contents %}
+{% endblock %}
+
+{% for k,v in title.items %}
+<p>{{forloop.revcounter}} k: {{k}} &nbsp; v: {{v}} </p>
+<!-- <p> {{forloop.first}} </p> -->
+{% endfor %}
+
+
+{% block foot %}
+<p style="color: red;">这是foot</p>
+{% endblock %}
+
+
+
+</body>
+</html>

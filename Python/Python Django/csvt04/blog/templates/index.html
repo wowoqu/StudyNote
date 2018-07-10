@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> {{title}} </title>
+</head>
+<body>
+	<div style="margin:10px auto;background: orange;width: 400px;color: #ffffff;font-size: 18px;">
+		{% for user in users %}
+			{% for k,v in user.items %}
+				<p style="padding-left: 10px;"> {{k}} = {{v}} </p>
+			{% endfor %}
+			<div style="width: 100%;height: 20px;background: #ffffff;"></div>
+		{% endfor %}
+	</div>
+</body>
+</html>
