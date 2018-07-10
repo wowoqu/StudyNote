@@ -1,7 +1,7 @@
-#ECMAScript6 Note
+# ECMAScript6 Note
 
-##let和const命令
-###1. let命令
+## let和const命令
+### 1. let命令
 
 ES6新增了`let`命令，用来声明变量。它的用法类似与`var`，但是所声明的变量，只在`let`命令所在的代码块内有效。
 
