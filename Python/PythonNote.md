@@ -138,3 +138,56 @@ stus.sort(key = lambda x:x['age'])
 
     cursor.close()
     conn.close()
+
+##Python yield关键字：
+带有yield的函数不再是一个普通函数，而是一个生成器generator。可用于迭代，执行这种函数会返回一个生成器generator。
+
+###实例一:
+    def yield_test(n):
+        for i in range(n):
+            yield call(n)               //类似于return 不过保留当前位置，当调用这个函数时，会执行yield，当遍历函数返回值时，会调用yield之后的代码
+            print('yield i = ', i)
+        print('end')
+
+    def call(n):
+        return i*2
+
+    a = yield_test(5)   //返回一个generator生成器
+    for i in a:         //遍历这个生成器
+        print(i)
+
+结果：
+
+    0                   //生成器generator中的值
+    yield i = 0         //yield之后一行的代码
+    2
+    yield i = 1
+    4
+    yield i = 2
+    6
+    yield i = 3
+    8
+    yield i = 4
+    print(end)
+
+
+##实例二:
+    def yield_test(n):
+        for i in range(n):
+            yield i*2
+        print('end')
+
+    a = yield_test(5)
+
+    for i in a:
+        print(i)
+
+结果:
+
+    0              
+    //因为yield后面没有代码，所以没得执行，相当于yield后的代码按正常顺序执行
+    2
+    4
+    6
+    8
+    end
