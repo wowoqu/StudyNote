@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试zTree</title>
+	<link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css">
+	<link rel="stylesheet" href="css/test.css">
+	<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery.ztree.core.min.js"></script>
+</head>
+<body>
+	<ul id="treeDemo" class="ztree"></ul>
+</body>
+	<script type="text/javascript">
+		var zTreeObj;
+		var setting = {
+			treeId: 'tree',
+			data: {
+				simpleData: {
+					enable: true,
+					idKey: "id",
+					pIdKey: "pId",
+					rootPId: 0
+				}
+			},
+			view: {
+				showIcon: true,
+				showLine: false,
+				fontCss: setFontCss,
+				nameIsHTML: true,
+			},
+			callback: {
+				onClick: zTreeOnClick,
+			}
+		};
+		function setFontCss(treeId, treeNode){
+			return treeNode.level == 0 ?{color:'red'}:{};
+		}
+		// var zNodes = [
+		// 	{name:"test1", open:true, children:[
+  //     			{name:"test1_1"}, {name:"test1_2"}
+  //     		]},
+  //  			{name:"test2", open:true, children:[
+  //     			{name:"test2_1"}, {name:"test2_2"}
+  //     		]}
+		// ];
+		function zTreeOnClick(event, treeId, treeNode) {
+			console.log(treeId);
+		    alert(treeNode.tId + ", " + treeNode.name);
+		};
+		zNodes = [
+			{id:1, pId:0, name: "<i>父节点1<i/>", iconOpen:'img/diy/1_open.png', iconClose:'img/diy/1_close.png'},
+			{id:11, pId:1, name: "子节点1"},
+			{id:12, pId:1, name: "子节点2"},
+			{id:21, pId:3, name: "子节点3"},
+			{id:111, pId:11, name: "子节点11"},
+			{id:2, pId:0, name: "父节点2", iconSkin:'diy02',click:'console.log(123)'},
+			{id:21, pId:2, name: "子节点1"},
+			{id:22, pId:2, name: "子节点2"},
+			{id:3, pId:0, name: "父节点3",url:"http://www.baidu.com", target:"_blank"},
+		];
+		$(document).ready(function(){
+			zTreeObj = $.fn.zTree.init($('#treeDemo'),setting, zNodes);
+
+			var treeObj = $.fn.zTree.getZTreeObj('treeDemo');
+			console.log(treeObj);
+			var nodes = treeObj.getSelectedNodes();
+			// if (nodes.length>0) {
+			// 	treeObj.reAsyncChildNodes(nodes[0], "refresh");
+			// };
+			// var treeObj = $.fn.zTree.getZTreeObj(2);
+			var nodes = treeObj.getNodes();
+			if (nodes.length>0) {
+				nodes[0].name = "test";
+				// treeObj.reAsyncChildNodes(nodes[0], "refresh");
+				treeObj.updateNode(nodes[0]);
+			}
+		});
+	</script>
+</html>
