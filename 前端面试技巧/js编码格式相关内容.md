@@ -104,3 +104,5 @@ FileReader.readAsText()
     WindowOrWorkerGlobalScope.atob() 对用base-64编码过的字符串进行解码 。你可以使用 window.btoa() 方法来编码一个可能在传输过程中出现问题的数据，并且在接受数据之后，使用 atob() 方法再将数据解码。例如：你可以编码、传输和解码操作各种字符，比如0-31的ASCII码值。
     
     关于针对Unicode或者UTF-8的应用方面，请查看 this note at Base64 encoding and decoding  和 this note at window.btoa()。
+
+相关链接： [https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader](link)
