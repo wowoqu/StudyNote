@@ -44,8 +44,8 @@
   //     			{name:"test2_1"}, {name:"test2_2"}
   //     		]}
 		// ];
-		function zTreeOnClick(event, treeId, treeNode) {
-			console.log(treeId);
+		function zTreeOnClick(event, treeId, treeNode, clickFlag) {
+			console.log(treeId + ' ' + clickFlag);
 		    alert(treeNode.tId + ", " + treeNode.name);
 		};
 		zNodes = [
@@ -65,6 +65,7 @@
 			var treeObj = $.fn.zTree.getZTreeObj('treeDemo');
 			console.log(treeObj);
 			var nodes = treeObj.getSelectedNodes();
+			console.log(nodes);
 			// if (nodes.length>0) {
 			// 	treeObj.reAsyncChildNodes(nodes[0], "refresh");
 			// };
