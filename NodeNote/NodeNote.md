@@ -1,12 +1,69 @@
-## 创建Node.js应用
+# 创建Node.js应用
+## CommonJS规范
 ### 加载模块
     var http = require('http');
+### 导出模板
+    function greet(){...}
+    module.exports = greet;
+### exports VS module.exports
+    exports与module.exports一样，但是exports只能赋值导出一个对象，不可以导出数组
+    module.exports则可以导出为数组或者对象。
+
+#### 示例
+    function greet(name) {
+        console.log(s + ',' + name + '!');
+    }
+    function hi(name) {
+        console.log('Hi, ' + name + '!');
+    }
+    function goodbye(name) {
+        console.log('GoodBye, ' + name + '!');
+    }
+    exports.greet = greet;
+    exports.hi = hi;
+    exports.goodbye = goodbye;
+    // module.exports = {
+    //  greet,
+    //  hi,
+    //  goodbye
+    // }
+    // 虽然两种方法导出不一样不过在导入接收时是一样的
+虽然两种方法都可用，但一般用的最多的是module.exports这种方法。
+
+#### 调用
+    // 代码可以通用两种方式的导入
+    'use strict';
+    const hello = require('./hello');
+    let s = 'Michael';
+    hello.greet(s);
+    hello.goodbye(s);
+
+## 基本模块
+### global
+    在js中有且仅有一个全局对象window，而在node.js中也有唯一的全局对象global，这个全局对象可同过cmd交互环境中输入 global.console 获得
+
+### process
+    process也是Node.js提供的一个对象，它代表当前Node.js进程。通过process对象可以拿到许多有用信息：
+#### process.cwd() // 返回当前工作目录
+    JavaScript程序是由事件驱动执行的单线程模型，Node.js也不例外。Node.js不断执行响应事件的JavaScript函数，直到没有任何响应事件的函数可以执行时，Node.js就退出了。
+
+    如果我们想要在下一次事件响应中执行代码，可以调用process.nextTick()：
+
+
+
+
+
+
+
+
+
+
+
 ### 创建服务器
     var http = require('http');
     
     http.createServer(function(request,response){
         response.writeHead(200,{'Content-Type':'text/plain'});
-
         response.write('hello world')
         response.end();   //必须写end否则页面一直加载。
                         //如果end内写着东西，则会相应两个请求一个是/favicon.ico
